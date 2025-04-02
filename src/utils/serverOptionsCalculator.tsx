@@ -24,16 +24,12 @@ export const determineServerOptions = (
     return [];
   }
   
-  if (isGpuAccelerated) {
-    if (cpu === "ARM" && memorySize >= HIGH_DENSITY_THRESHOLD) {
-      return [SERVER_TYPES.HIGH_DENSITY];
-    } else {
-      return [];
-    }
+  if (cpu === "ARM" && isGpuAccelerated && memorySize >= HIGH_DENSITY_THRESHOLD) {
+    return [SERVER_TYPES.HIGH_DENSITY];
   }
   
   const availableModels = [];
-  if (cpu === "power" && memorySize >= BASIC_SERVER_THRESHOLD) {
+  if (cpu === "Power" && memorySize >= BASIC_SERVER_THRESHOLD) {
     availableModels.push(SERVER_TYPES.MAINFRAME);
   }
   
