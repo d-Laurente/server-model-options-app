@@ -1,0 +1,10 @@
+.server-composer-container {
+    margin: 25px;
+}
+
+.server-composer-form {
+    display: "flex";
+    flex-direction: "column";
+    width: "100%";
+    background-color: red;
+}
