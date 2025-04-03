@@ -5,7 +5,7 @@ import ServerComposerForm from "../ServerComposerForm";
 import { ServerComposerFormInputs, ServerComposerFormErrors } from "../../types/server";
 
 // Mock the child components for isolation
-jest.mock('../CpuSelectDropdown', () => ({
+jest.mock("../CpuSelectDropdown", () => ({
   __esModule: true,
   default: ({ cpu, cpuOptions, onChange, sx }: any) => (
     <div data-testid="cpu-select-dropdown">
@@ -25,14 +25,14 @@ jest.mock('../CpuSelectDropdown', () => ({
   )
 }));
 
-jest.mock('../MemoryInput', () => ({
+jest.mock("../MemoryInput", () => ({
   __esModule: true,
   default: ({ memorySize, memoryFieldHelperText, onChange, sx }: any) => (
     <div data-testid="memory-input-component">
       <input 
         data-testid="memory-input" 
         name="memory-size-input"
-        value={memorySize || ''}
+        value={memorySize || ""}
         onChange={onChange}
         aria-label="Memory"
       />
@@ -67,10 +67,10 @@ describe("ServerComposerForm Component", () => {
     render(<ServerComposerForm {...defaultProps} />);
     
     // Check for all major components
-    expect(screen.getByTestId('cpu-select-dropdown')).toBeInTheDocument();
-    expect(screen.getByTestId('memory-input-component')).toBeInTheDocument();
-    expect(screen.getByLabelText('GPU Accelerated Card')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+    expect(screen.getByTestId("cpu-select-dropdown")).toBeInTheDocument();
+    expect(screen.getByTestId("memory-input-component")).toBeInTheDocument();
+    expect(screen.getByLabelText("GPU Accelerated Card")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /submit/i })).toBeInTheDocument();
   });
 
   test("passes correct props to child components", () => {
@@ -84,15 +84,15 @@ describe("ServerComposerForm Component", () => {
     };
     render(<ServerComposerForm {...customProps} />);
 
-    const cpuSelect = screen.getByTestId('cpu-select'); 
-    expect(cpuSelect).toHaveValue('ARM');
+    const cpuSelect = screen.getByTestId("cpu-select"); 
+    expect(cpuSelect).toHaveValue("ARM");
     
     // Check MemoryInput receives correct memory value
-    const memoryInput = screen.getByTestId('memory-input');
-    expect(memoryInput).toHaveValue('2048');
+    const memoryInput = screen.getByTestId("memory-input");
+    expect(memoryInput).toHaveValue("2048");
     
     // Check Checkbox is checked
-    const checkbox = screen.getByLabelText('GPU Accelerated Card');
+    const checkbox = screen.getByLabelText("GPU Accelerated Card");
     expect(checkbox).toBeChecked();
   });
 
@@ -123,8 +123,8 @@ describe("ServerComposerForm Component", () => {
   test("calls onChange when memory input changes", () => {
     render(<ServerComposerForm {...defaultProps} />);
     
-    const memoryInput = screen.getByTestId('memory-input');
-    fireEvent.change(memoryInput, { target: { value: '2048' } });
+    const memoryInput = screen.getByTestId("memory-input");
+    fireEvent.change(memoryInput, { target: { value: "2048" } });
     
     expect(defaultProps.onChange).toHaveBeenCalledTimes(1);
   });
@@ -140,7 +140,7 @@ describe("ServerComposerForm Component", () => {
 
   test("calls onSubmit when form is submitted", () => {
     const { container } = render(<ServerComposerForm {...defaultProps} />);
-    const form = container.querySelector('form') || container.firstChild;
+    const form = container.querySelector("form") || container.firstChild;
     fireEvent.submit(form);
     
     expect(defaultProps.onSubmit).toHaveBeenCalledTimes(1);
